@@ -4,3 +4,7 @@ build/
 
 # result *csv
 *.csv
+
+# after pre-commit
+*_cache
+node_modules
