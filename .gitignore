@@ -1,0 +1,3 @@
+# after pip and build function
+*.egg-info
+build/
