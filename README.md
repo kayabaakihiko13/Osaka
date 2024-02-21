@@ -1,3 +1,4 @@
 # Osaka
+![Banner](.github/image/peakpx.jpg)
 
-This Repository about Scraping data with Rapid Api
+This repository is about scraping data from Google Maps using the Rapid API.
