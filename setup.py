@@ -17,5 +17,5 @@ setup(
     author_email="iqbalramad75@gmail.com",
     install_requires=install_require,
     packages=["Osaka"],
-    python_requires=">=3.11",
+    python_requires=">=3.10",
 )
