@@ -27,3 +27,16 @@
 Untuk panduan yang lebih rinci, lihat dokumentasi tutorial video kami tentang cara berlangganan dan mengintegrasikan API Google Maps melalui Rapid API. Video ini mencakup setiap langkah dalam proses tersebut, memudahkan Anda untuk mengikuti dan memulai dengan API di proyek Anda.
 
 [Tonton Tutorial Video](https://youtu.be/t1lbJvoPxwM)
+
+## Langkah 5: PIP install Module ini
+install Module ini bisa melalui
+```sh
+git clone https://github.com/kayabaakihiko13/Osaka.git
+
+cd Osaka
+pip install .
+```
+atau juga bisa seperti ini
+```sh
+pip install git+https://github.com/kayabaakihiko13/Osaka.git
+```
