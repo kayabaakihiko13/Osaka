@@ -53,7 +53,7 @@ class GoogleMapAPI(object):
             return pd.json_normalize(reviews) if reviews else pd.DataFrame()
 
         elif isinstance(business_id, pd.Series):
-            all_results = []
+            all_results = {}
             for id in business_id:
                 querystring = {
                     "business_id": id,
@@ -70,6 +70,6 @@ class GoogleMapAPI(object):
                 else:
                     reviews = data.get("data", {}).get("reviews", [])
                 result_data = pd.json_normalize(reviews) if reviews else pd.DataFrame()
-                all_results.append(result_data)
+                all_results[id] = result_data.to_dict(orient="records")
 
-            return pd.concat(all_results, ignore_index=True)
+            return pd.DataFrame.from_dict(all_results, orient="index")
