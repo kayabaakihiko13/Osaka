@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from typing import Union
+from datetime import datetime
 
 
 class GoogleMapAPI(object):
@@ -76,3 +77,40 @@ class GoogleMapAPI(object):
                 all_results.append(result_data)
 
             return pd.concat(all_results, ignore_index=True)
+
+
+class Twitter_API(object):
+    def __init__(self, api_key: str, api_host: str):
+        self.key = api_key
+        self.host = api_host
+        self.hastag = "twitter154.p.rapidapi.com"
+        self.url_hastag = "https://twitter154.p.rapidapi.com/hashtag/hashtag"
+
+    def hashtag(
+        self, hashtag: str, limit: int = 20, section: str = "top"
+    ) -> pd.DataFrame:
+        header = {"X-RapidAPI-Key": self.key, "X-RapidAPI-Host": self.host}
+        querystring = {"hashtag": hashtag, "limit": str(limit), "section": section}
+        response = requests.get(self.url_hastag, headers=header, params=querystring)
+        selected_columns = [
+            "tweet_id",
+            "creation_date",
+            "text",
+            "media_url",
+            "video_url",
+            "user.username",
+            "favorite_count",
+            "retweet_count",
+            "reply_count",
+            "quote_count",
+            "retweet",
+            "views",
+            "timestamp",
+            "source",
+        ]
+        df = pd.json_normalize(response.json().get("results", []))[selected_columns]
+        # convert time stamps be normal
+        df["timestamp"] = df["timestamp"].apply(
+            lambda x: datetime.utcfromtimestamp(x).strftime("%Y-%m-%d %H:%M:%S UTC")
+        )
+        return df
